@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "747572677005",
+    "project_id": "expense-wallet-dcbc6",
+    "storage_bucket": "expense-wallet-dcbc6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747572677005:android:128cef025d167512fe95c4",
+        "android_client_info": {
+          "package_name": "com.app.expense_wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747572677005-pnqljg7jvsm0c0q8b6bqfcafsn6evllj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.expense_wallet",
+            "certificate_hash": "513ed585199a27210627e7da303583e474cba684"
+          }
+        },
+        {
+          "client_id": "747572677005-v8j0jtga856uf97i9fcibeel15ms50ed.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.expense_wallet",
+            "certificate_hash": "fe207e6aef03e8bb925ac752ff2e94a969bfdf24"
+          }
+        },
+        {
+          "client_id": "747572677005-afi7t7vpn4a99urpg49qsmi1a3ust1mf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx2TQfclbkanAKmEUzQBQpJL0WWWpCBYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747572677005-afi7t7vpn4a99urpg49qsmi1a3ust1mf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

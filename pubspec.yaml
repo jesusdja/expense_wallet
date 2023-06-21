@@ -1,0 +1,48 @@
+name: expense_wallet
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #STYLE
+  google_fonts: ^4.0.3
+  cupertino_icons: ^1.0.2
+  flutter_launcher_icons:
+
+  #Estado
+  provider: ^6.0.2
+  shared_preferences: ^2.0.15
+
+  #FIREBASE
+  firebase_core: ^2.14.0
+  cloud_firestore: ^4.8.1
+  firebase_auth: ^4.6.3
+  google_sign_in: ^6.1.4
+
+  #UTILS
+  fluttertoast: ^8.0.7
+  url_launcher: ^6.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/img/logo-removebg.png"
+  adaptive_icon_background: "assets/img/logo-removebg.png"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/img/
