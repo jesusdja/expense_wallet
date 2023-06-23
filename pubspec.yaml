@@ -15,6 +15,7 @@ dependencies:
   #STYLE
   google_fonts: ^4.0.3
   cupertino_icons: ^1.0.2
+  cached_network_image: ^3.2.3
   flutter_launcher_icons:
 
   #Estado

@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expense_wallet/config/wallet_colors.dart';
 import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
@@ -36,8 +37,7 @@ class _DrawerHomeState extends State<DrawerHome> {
     double photoH = sizeH * 0.17;
 
     Widget photoW = Container(
-      width: photoH,
-      height: photoH,
+      width: photoH,height: photoH,
       decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: WalletColors.primary
@@ -46,6 +46,20 @@ class _DrawerHomeState extends State<DrawerHome> {
         child: Icon(Icons.person,size: sizeH * 0.06,color: Colors.white),
       ),
     );
+
+    if(homeProvider.userFirebase != null && homeProvider.userFirebase!.photoURL != null){
+
+      photoW = ClipOval(
+        child: CachedNetworkImage(
+          width: photoH,
+          height: photoH,
+          fit: BoxFit.cover,
+          imageUrl: homeProvider.userFirebase!.photoURL!,
+          progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),
+      );
+    }
 
     return Container(
       width: sizeW * 0.6,
