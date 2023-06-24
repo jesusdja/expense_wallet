@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expense_wallet/config/wallet_colors.dart';
 import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
+import 'package:expense_wallet/pages/categories/models/categories_model.dart';
 import 'package:expense_wallet/pages/categories/provider/categories_provider.dart';
+import 'package:expense_wallet/pages/categories/provider/firebase_connection_categories.dart';
 import 'package:expense_wallet/widgets_utils/button_general.dart';
 import 'package:expense_wallet/widgets_utils/circular_progress_colors.dart';
 import 'package:expense_wallet/widgets_utils/dialog_alert.dart';
@@ -42,6 +45,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
       Center(child: circularProgressColors(),) :
       Column(
         children: [
+          SizedBox(height: sizeH * 0.025),
+          Expanded(
+            child: listCategories(),
+          ),
           cardAdd(),
         ],
       ),
@@ -105,5 +112,84 @@ class _CategoriesPageState extends State<CategoriesPage> {
       showAlert(text: error, isError: true);
     }
     categoriesProvider.loadSaveAdd = false;
+  }
+
+  Widget listCategories(){
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseConnectionCategories().collection.snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+        if (snapshot.hasError) {
+          return const Center(child: Text('Error al cargar los datos'),);
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: circularProgressColors(),);
+        }
+        return ListView(
+          physics: const BouncingScrollPhysics(),
+          children: snapshot.data!.docs.map((DocumentSnapshot document) {
+            return cardCategory(categoriesModel: CategoriesModel.fromMap(document.data() as Map<String,dynamic>));
+          }).toList(),
+        );
+      }
+    );
+  }
+
+  Widget cardCategory({required CategoriesModel categoriesModel}){
+
+    bool isInactivo = categoriesModel.status!.contains('inactivo');
+    if(categoriesModel.status!.contains('delete')) return Container();
+
+    return Container(
+      width: sizeW,
+      margin: EdgeInsets.only(left: sizeW * .02,right: sizeW * .02,bottom: sizeH * 0.01),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(categoriesModel.name!,style: WalletStyles().stylePrimary(
+              size: sizeH * 0.025,fontWeight: FontWeight.bold
+            )),
+          ),
+          ButtonGeneral(
+            title: isInactivo ? 'Activar' : 'Desactivar',
+            textStyle: WalletStyles().stylePrimary(size: sizeH * 0.015,color: Colors.white),
+            backgroundColor: isInactivo ? Colors.green : Colors.orangeAccent,
+            width: sizeW * 0.2,height: sizeH * 0.05,
+            onPressed: (){
+              if(isInactivo){
+                editCategories(categoriesModel: categoriesModel,status: 'activo');
+              }else{
+                editCategories(categoriesModel: categoriesModel,status: 'inactivo');
+              }
+            },
+          ),
+          ButtonGeneral(
+            margin: EdgeInsets.only(left: sizeW * 0.02,),
+            title: 'Eliminar',
+            textStyle: WalletStyles().stylePrimary(size: sizeH * 0.015,color: Colors.white),
+            backgroundColor: isInactivo ? Colors.grey : Colors.red,
+            width: sizeW * 0.2, height: sizeH * 0.05,
+            onPressed: ()=> isInactivo ? null : editCategories(categoriesModel: categoriesModel,status: 'delete'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future editCategories({required CategoriesModel categoriesModel, required String status}) async {
+
+    String subTitle = '';
+    if(status.contains('delete')){ subTitle = 'Quieres eliminar esta categoria'; }
+    if(status.contains('activo')){ subTitle = 'Quieres activar esta categoria'; }
+    if(status.contains('inactivo')){ subTitle = 'Quieres descativar esta categoria'; }
+
+    bool? res = await alertTitle(title: 'Categoría',subTitle: subTitle);
+    if(res != null && res){
+      categoriesModel.status = status;
+      if(await categoriesProvider.editCategories(categoriesModel: categoriesModel)){
+        showAlert(text: 'exito!');
+      }else{
+        showAlert(text: 'Problemas para enviar la información', isError: true);
+      }
+    }
   }
 }

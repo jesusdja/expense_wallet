@@ -39,7 +39,15 @@ class CategoriesProvider extends ChangeNotifier {
     return result;
   }
 
-
+  Future<bool> editCategories({required CategoriesModel categoriesModel}) async {
+    bool result = false;
+    try{
+      result = await FirebaseConnectionCategories().edit(data: categoriesModel);
+    }catch(e){
+      debugPrint(e.toString());
+    }
+    return result;
+  }
 
 
 
