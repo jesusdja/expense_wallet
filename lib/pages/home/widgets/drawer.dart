@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expense_wallet/config/wallet_colors.dart';
 import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
+import 'package:expense_wallet/pages/categories/categories_page.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
 import 'package:expense_wallet/pages/splash/providers/splash_provider.dart';
 import 'package:expense_wallet/services/authenticate_firebase.dart';
@@ -108,7 +109,9 @@ class _DrawerHomeState extends State<DrawerHome> {
   }
 
   Future type0() async {
-
+    Navigator.push(context,MaterialPageRoute<void>(
+        builder: (context) => const CategoriesPage()
+    ),);
   }
   Future type1() async {
 
