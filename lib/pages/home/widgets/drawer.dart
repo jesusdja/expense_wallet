@@ -6,6 +6,7 @@ import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/categories/categories_page.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
+import 'package:expense_wallet/pages/payments_monthly/payments_monthly_page.dart';
 import 'package:expense_wallet/pages/splash/providers/splash_provider.dart';
 import 'package:expense_wallet/services/authenticate_firebase.dart';
 import 'package:expense_wallet/services/shared_preferences_static.dart';
@@ -113,9 +114,13 @@ class _DrawerHomeState extends State<DrawerHome> {
         builder: (context) => const CategoriesPage()
     ),);
   }
-  Future type1() async {
 
+  Future type1() async {
+    Navigator.push(context,MaterialPageRoute<void>(
+        builder: (context) => const PaymentsMonthlyPage()
+    ),);
   }
+
   Future type2() async {
     bool? res = await alertTitle(title: 'Cerrar Sesión?');
     if(res != null && res){

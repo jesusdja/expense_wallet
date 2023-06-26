@@ -5,6 +5,7 @@ import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/categories/models/categories_model.dart';
 import 'package:expense_wallet/pages/categories/provider/categories_provider.dart';
 import 'package:expense_wallet/pages/categories/provider/firebase_connection_categories.dart';
+import 'package:expense_wallet/services/authenticate_firebase.dart';
 import 'package:expense_wallet/widgets_utils/button_general.dart';
 import 'package:expense_wallet/widgets_utils/circular_progress_colors.dart';
 import 'package:expense_wallet/widgets_utils/dialog_alert.dart';
@@ -116,7 +117,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   Widget listCategories(){
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseConnectionCategories().collection.snapshots(),
+      stream: FirebaseConnectionCategories().collection.where('user',isEqualTo: AuthenticateFirebaseUser().firebaseAuth.currentUser!.uid).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
         if (snapshot.hasError) {
           return const Center(child: Text('Error al cargar los datos'),);

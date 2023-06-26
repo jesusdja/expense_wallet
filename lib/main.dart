@@ -2,6 +2,7 @@ import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/categories/provider/categories_provider.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
 import 'package:expense_wallet/pages/login/provider/login_provider.dart';
+import 'package:expense_wallet/pages/payments_monthly/providers/payments_monthly_provider.dart';
 import 'package:expense_wallet/pages/splash/providers/splash_provider.dart';
 import 'package:expense_wallet/services/shared_preferences_static.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(lazy: false,create: ( _ ) => HomeProvider()),
         ChangeNotifierProvider(lazy: false,create: ( _ ) => LoginProvider()),
         ChangeNotifierProvider(lazy: false,create: ( _ ) => CategoriesProvider()),
+        ChangeNotifierProvider(lazy: false,create: ( _ ) => PaymentsMonthlyProvider()),
       ],
       child: const MyApp(),
     );

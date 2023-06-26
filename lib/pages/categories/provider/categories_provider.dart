@@ -4,12 +4,28 @@ import 'package:flutter/material.dart';
 
 class CategoriesProvider extends ChangeNotifier {
 
+  CategoriesProvider(){
+    initialProvider();
+  }
+
   TextEditingController controllerAdd = TextEditingController();
   bool loadDataInitialAdd = true;
+  bool loadDataInitial = true;
 
   bool _loadSaveAdd = false;
   bool get loadSaveAdd => _loadSaveAdd;
   set loadSaveAdd(bool value){ _loadSaveAdd = value; notifyListeners(); }
+
+  List<CategoriesModel> listCategories = [];
+
+  Future initialProvider() async {
+    loadDataInitial = true; notifyListeners();
+    FirebaseConnectionCategories().collection.snapshots().listen((event) async {
+      listCategories = await FirebaseConnectionCategories().getAll();
+      listCategories.sort((a,b) => a.name!.compareTo(b.name!));
+      loadDataInitial = false; notifyListeners();
+    });
+  }
 
   Future initialDataAdd() async {
     loadDataInitialAdd = true; notifyListeners();
@@ -48,8 +64,4 @@ class CategoriesProvider extends ChangeNotifier {
     }
     return result;
   }
-
-
-
-
 }
