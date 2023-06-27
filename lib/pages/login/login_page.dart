@@ -3,6 +3,7 @@ import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/categories/provider/categories_provider.dart';
 import 'package:expense_wallet/pages/login/provider/login_provider.dart';
+import 'package:expense_wallet/pages/payments_monthly/providers/payments_monthly_provider.dart';
 import 'package:expense_wallet/pages/splash/providers/splash_provider.dart';
 import 'package:expense_wallet/services/shared_preferences_static.dart';
 import 'package:expense_wallet/widgets_utils/button_general.dart';
@@ -56,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () async {
         if(await loginProvider.login()){
           Provider.of<CategoriesProvider>(context,listen: false).initialProvider();
+          Provider.of<PaymentsMonthlyProvider>(context,listen: false).initialProvider();
           SharedPreferencesLocal.walletLogin = 1;
           Provider.of<SplashProvider>(context,listen: false).initSplash();
         }else{
