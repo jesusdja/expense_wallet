@@ -2,6 +2,7 @@ import 'package:expense_wallet/config/wallet_colors.dart';
 import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/bank_accounts/providers/bank_accounts_provider.dart';
+import 'package:expense_wallet/pages/bank_accounts/widgets/list_bank_accounts.dart';
 import 'package:expense_wallet/widgets_utils/button_general.dart';
 import 'package:expense_wallet/widgets_utils/circular_progress_colors.dart';
 import 'package:expense_wallet/widgets_utils/dialog_alert.dart';
@@ -43,8 +44,8 @@ class _BankAccountsState extends State<BankAccounts> {
       Column(
         children: [
           SizedBox(height: sizeH * 0.025),
-          Expanded(
-            child: Container(),
+          const Expanded(
+            child: ListBankAccountsPage(),
           ),
           cardAdd(),
         ],
@@ -95,8 +96,8 @@ class _BankAccountsState extends State<BankAccounts> {
     if(error.isEmpty){
       bool? res = await alertTitle(title: 'Agregar cuenta',subTitle: 'Se va agregar la cuenta a su listado');
       if(res != null && res){
-        if(await bankAccountsProvider.existsCategories()){
-          if(await bankAccountsProvider.createCategories()){
+        if(await bankAccountsProvider.existsBankAccount()){
+          if(await bankAccountsProvider.createBankAccount()){
             await bankAccountsProvider.initialDataAdd();
             showAlert(text: 'Creado con exito!');
           }else{

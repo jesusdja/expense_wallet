@@ -3,7 +3,7 @@ import 'package:expense_wallet/config/wallet_image.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
 import 'package:expense_wallet/pages/home/widgets/drawer.dart';
-import 'package:expense_wallet/pages/login/show_modal_bottom_sheet.dart';
+import 'package:expense_wallet/pages/home/widgets/show_modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

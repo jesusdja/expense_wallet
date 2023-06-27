@@ -4,12 +4,28 @@ import 'package:flutter/material.dart';
 
 class BankAccountsProvider extends ChangeNotifier {
 
+  BankAccountsProvider(){
+    initialProvider();
+  }
+
   bool loadDataInitialAdd = true;
+  bool loadDataInitial = true;
   TextEditingController controllerAdd = TextEditingController();
 
   bool _loadSaveAdd = false;
   bool get loadSaveAdd => _loadSaveAdd;
   set loadSaveAdd(bool value){ _loadSaveAdd = value; notifyListeners(); }
+
+  List<BankAccountModel> listBankAccounts = [];
+
+  Future initialProvider() async {
+    loadDataInitial = true; notifyListeners();
+    FirebaseConnectionBankAccounts().collection.snapshots().listen((event) async {
+      listBankAccounts = await FirebaseConnectionBankAccounts().getAll();
+      listBankAccounts.sort((a,b) => a.name!.compareTo(b.name!));
+      loadDataInitial = false; notifyListeners();
+    });
+  }
 
   Future initialDataAdd() async {
     loadDataInitialAdd = true; notifyListeners();
@@ -19,7 +35,7 @@ class BankAccountsProvider extends ChangeNotifier {
     loadDataInitialAdd = false; notifyListeners();
   }
 
-  Future<bool> createCategories() async {
+  Future<bool> createBankAccount() async {
     bool result = false;
     try{
       result = await FirebaseConnectionBankAccounts().create(BankAccountModel(name: controllerAdd.text, status: 'activo'));
@@ -29,10 +45,20 @@ class BankAccountsProvider extends ChangeNotifier {
     return result;
   }
 
-  Future<bool> existsCategories() async {
+  Future<bool> existsBankAccount() async {
     bool result = false;
     try{
       result = await FirebaseConnectionBankAccounts().getUID(name: controllerAdd.text);
+    }catch(e){
+      debugPrint(e.toString());
+    }
+    return result;
+  }
+
+  Future<bool> editBankAccount({required BankAccountModel bankAccountModel}) async {
+    bool result = false;
+    try{
+      result = await FirebaseConnectionBankAccounts().edit(data: bankAccountModel);
     }catch(e){
       debugPrint(e.toString());
     }
