@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expense_wallet/config/wallet_colors.dart';
 import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
+import 'package:expense_wallet/pages/bank_accounts/bank_accounts_page.dart';
 import 'package:expense_wallet/pages/categories/categories_page.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
 import 'package:expense_wallet/pages/payments_monthly/payments_monthly_page.dart';
@@ -76,8 +77,9 @@ class _DrawerHomeState extends State<DrawerHome> {
           SizedBox(height: sizeH * 0.05,),
           titleDrawer(type: 0),divide,
           titleDrawer(type: 1),divide,
+          titleDrawer(type: 2),divide,
           Expanded(child: Container()),
-          titleDrawer(type: 2),
+          titleDrawer(type: 3),
           SizedBox(height: sizeH * 0.05,),
         ],
       ),
@@ -88,7 +90,8 @@ class _DrawerHomeState extends State<DrawerHome> {
     String title = '';
     if(type == 0){ title = 'Mis categorias'; }
     if(type == 1){ title = 'Mis gasos mensuales'; }
-    if(type == 2){ title = 'Cerrar Sesión'; }
+    if(type == 2){ title = 'Mis cuentas'; }
+    if(type == 3){ title = 'Cerrar Sesión'; }
 
     return InkWell(
       child: Container(
@@ -105,6 +108,7 @@ class _DrawerHomeState extends State<DrawerHome> {
         if(type == 0){ await type0(); }
         if(type == 1){ await type1(); }
         if(type == 2){ await type2(); }
+        if(type == 3){ await type3(); }
       },
     );
   }
@@ -122,6 +126,12 @@ class _DrawerHomeState extends State<DrawerHome> {
   }
 
   Future type2() async {
+    Navigator.push(context,MaterialPageRoute<void>(
+        builder: (context) => const BankAccounts()
+    ),);
+  }
+
+  Future type3() async {
     bool? res = await alertTitle(title: 'Cerrar Sesión?');
     if(res != null && res){
       await AuthenticateFirebaseUser().signOutFirebase();

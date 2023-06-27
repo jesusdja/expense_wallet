@@ -1,5 +1,4 @@
 import 'package:expense_wallet/config/wallet_colors.dart';
-import 'package:expense_wallet/config/wallet_image.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/widgets_utils/circular_progress_colors.dart';
 import 'package:expense_wallet/widgets_utils/icon_app.dart';

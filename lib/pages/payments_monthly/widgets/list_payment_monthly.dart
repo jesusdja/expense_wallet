@@ -1,4 +1,3 @@
-import 'package:expense_wallet/config/wallet_colors.dart';
 import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/categories/provider/categories_provider.dart';
@@ -7,11 +6,8 @@ import 'package:expense_wallet/pages/payments_monthly/providers/payments_monthly
 import 'package:expense_wallet/widgets_utils/button_general.dart';
 import 'package:expense_wallet/widgets_utils/circular_progress_colors.dart';
 import 'package:expense_wallet/widgets_utils/dialog_alert.dart';
-import 'package:expense_wallet/widgets_utils/textfield_general.dart';
 import 'package:expense_wallet/widgets_utils/toast_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ListPaymentMonth extends StatefulWidget {
