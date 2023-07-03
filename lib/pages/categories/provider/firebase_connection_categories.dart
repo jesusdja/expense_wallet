@@ -39,7 +39,7 @@ class FirebaseConnectionCategories{
   Future<bool> getUID({required String name}) async{
     List<QueryDocumentSnapshot> listAll = [];
     try{
-      var result =  await collection.where('name',isEqualTo: name).get();
+      var result =  await collection.where('name',isEqualTo: name).where('user',isEqualTo: AuthenticateFirebaseUser().firebaseAuth.currentUser!.uid).get();
       listAll = result.docs.map((QueryDocumentSnapshot e) => e).toList();
     }catch(ex){
       debugPrint(ex.toString());

@@ -3,6 +3,7 @@ import 'package:expense_wallet/pages/bank_accounts/providers/bank_accounts_provi
 import 'package:expense_wallet/pages/categories/provider/categories_provider.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
 import 'package:expense_wallet/pages/login/provider/login_provider.dart';
+import 'package:expense_wallet/pages/payment/provider/add_payment_provider.dart';
 import 'package:expense_wallet/pages/payments_monthly/providers/payments_monthly_provider.dart';
 import 'package:expense_wallet/pages/splash/providers/splash_provider.dart';
 import 'package:expense_wallet/services/shared_preferences_static.dart';
@@ -32,6 +33,7 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(lazy: false,create: ( _ ) => CategoriesProvider()),
         ChangeNotifierProvider(lazy: false,create: ( _ ) => PaymentsMonthlyProvider()),
         ChangeNotifierProvider(lazy: false,create: ( _ ) => BankAccountsProvider()),
+        ChangeNotifierProvider(lazy: false,create: ( _ ) => AddPaymentProvider()),
       ],
       child: const MyApp(),
     );

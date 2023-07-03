@@ -1,6 +1,7 @@
 import 'package:expense_wallet/config/wallet_colors.dart';
 import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
+import 'package:expense_wallet/pages/payment/add_payment_page.dart';
 import 'package:flutter/material.dart';
 
 class ShowModalBottom extends StatefulWidget {
@@ -59,16 +60,13 @@ class _ShowModalBottomState extends State<ShowModalBottom> {
             child: Container(
               height: sizeH * 0.7,
               decoration: const BoxDecoration(
-                color: WalletColors.color_829ae3,
+                color: WalletColors.color_cbd5f3,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(0.0),topLeft: Radius.circular(15.0),
                   bottomRight: Radius.circular(0.0),topRight: Radius.circular(15.0),
                 ),
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: const [],
-              ),
+              child: const AddPaymentPage(),
             ),
           );
         });
