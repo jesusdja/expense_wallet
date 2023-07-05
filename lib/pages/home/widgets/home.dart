@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
         children: [
           SizedBox(
             width: sizeW,
-            height: sizeH * 0.3,
+            height: sizeH * 0.03,
           ),
           Expanded(
             child: homeProvider.loadDataInitial ?

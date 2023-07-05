@@ -56,6 +56,7 @@ class HomeProvider extends ChangeNotifier {
 
     int monthOld = dateInitial.month;
     int yearOld = dateInitial.year;
+    listDate = [];
 
     while(monthOld <= DateTime.now().month && yearOld <= DateTime.now().year){
       debugPrint('$monthOld <= ${DateTime.now().month} && $yearOld <= ${DateTime.now().year}');
