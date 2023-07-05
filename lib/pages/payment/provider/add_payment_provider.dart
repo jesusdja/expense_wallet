@@ -28,7 +28,7 @@ class AddPaymentProvider extends ChangeNotifier {
         amount: paymentMonthModel.amount!,
         category: paymentMonthModel.category!,
         title: paymentMonthModel.title!,
-        month: '${DateTime.now().month}/${DateTime.now().year}'
+        month: '${DateTime.now().month.toString().padLeft(2,'0')}/${DateTime.now().year}'
       ));
     }catch(_){}
     idPaySend = '';

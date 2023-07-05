@@ -2,7 +2,9 @@ import 'package:expense_wallet/config/wallet_colors.dart';
 import 'package:expense_wallet/config/wallet_image.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
+import 'package:expense_wallet/pages/home/widgets/calendar_date_view.dart';
 import 'package:expense_wallet/pages/home/widgets/drawer.dart';
+import 'package:expense_wallet/pages/home/widgets/home.dart';
 import 'package:expense_wallet/pages/home/widgets/show_modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,6 +51,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            const Home(),
             const Align(
               alignment: Alignment.bottomCenter,
               child: ShowModalBottom(),
@@ -65,6 +68,8 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       elevation: 0.0,
       actions: [
+        const CalendarDate(),
+        const Spacer(),
         InkWell(
           child: Container(
             margin: EdgeInsets.only(right: sizeW * 0.05),

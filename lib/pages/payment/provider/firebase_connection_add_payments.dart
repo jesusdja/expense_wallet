@@ -21,11 +21,13 @@ class FirebaseConnectionPayment{
     return res;
   }
 
-  Future<List<PaymentModel>> getAll() async{
+  Future<List<PaymentModel>> getAll({required String date}) async{
     List<PaymentModel> listAll = [];
     try{
       if(AuthenticateFirebaseUser().firebaseAuth.currentUser != null){
-        var result =  await collection.where('user',isEqualTo: AuthenticateFirebaseUser().firebaseAuth.currentUser!.uid).get();
+        var result =  await collection.
+        where('user',isEqualTo: AuthenticateFirebaseUser().firebaseAuth.currentUser!.uid).
+        where('month',isEqualTo: date).get();
         listAll = result.docs.map((QueryDocumentSnapshot e){
           return PaymentModel.fromMap(e.data() as Map<String,dynamic>) ;
         }).toList();
