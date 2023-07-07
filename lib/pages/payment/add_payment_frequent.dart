@@ -1,6 +1,7 @@
 import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
+import 'package:expense_wallet/pages/payment/models/payment_model.dart';
 import 'package:expense_wallet/pages/payment/provider/add_payment_provider.dart';
 import 'package:expense_wallet/pages/payments_monthly/models/payment_monthly_model.dart';
 import 'package:expense_wallet/pages/payments_monthly/providers/payments_monthly_provider.dart';
@@ -30,34 +31,56 @@ class _AddPaymentFrequentState extends State<AddPaymentFrequent> {
     addPaymentProvider = Provider.of<AddPaymentProvider>(context);
     homeProvider = Provider.of<HomeProvider>(context);
 
+    List<PaymentMonthModel> listDataW1 = [];
+    List<PaymentMonthModel> listDataW2 = [];
+
     List<Widget> listW = [];
+    List<Widget> listWPage = [];
 
     for (var element in paymentsMonthlyProvider.listPaymentsMonthly) {
-      listW.add(card(paymentMonthModel: element));
+      bool isSend = true;
+      for (var element2 in homeProvider.payments) {
+        if(element2.title! == element.title! &&
+            element2.amount! == element.amount! &&
+            element2.category! == element.category!){
+          isSend = false;
+        }
+      }
+      if(isSend){
+        listDataW1.add(element);
+      }else{
+        listDataW2.add(element);
+      }
+    }
+
+    listDataW1.sort((a,b) => DateTime.parse(a.date!).day.compareTo(DateTime.parse(b.date!).day));
+    listDataW2.sort((a,b) => DateTime.parse(a.date!).day.compareTo(DateTime.parse(b.date!).day));
+
+    for (var element in listDataW1) {
+      listW.add(card(paymentMonthModel: element, isSend: true));
+    }
+    for (var element in listDataW2) {
+      listWPage.add(card(paymentMonthModel: element, isSend: false));
     }
 
     return SingleChildScrollView(
       child: Column(
-        children: listW,
+        children: [
+          ...listW,
+          ...listWPage
+        ],
       ),
     );
   }
 
-  Widget card({required PaymentMonthModel paymentMonthModel}){
+  Widget card({required PaymentMonthModel paymentMonthModel, required bool isSend}){
 
     String dateSt = '${DateTime.parse(paymentMonthModel.date!).day} de cada mes';
 
     TextStyle style = WalletStyles().stylePrimary(size: sizeH * 0.02,fontWeight: FontWeight.bold);
     TextStyle style2 = WalletStyles().stylePrimary(size: sizeH * 0.02);
 
-    bool isSend = true;
-    for (var element in homeProvider.payments) {
-      if(element.title! == paymentMonthModel.title! &&
-          element.amount! == paymentMonthModel.amount! &&
-          element.category! == paymentMonthModel.category!){
-        isSend = false;
-      }
-    }
+
 
     return Container(
       width: sizeW,

@@ -28,6 +28,10 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
+  bool _typeHomePrimary = true;
+  bool get typeHomePrimary => _typeHomePrimary;
+  set typeHomePrimary(bool value){ _typeHomePrimary = value; notifyListeners(); }
+
   Future userActive() async {
     AuthenticateFirebaseUser().firebaseAuth.authStateChanges().listen((event) async {
       userFirebase = event;

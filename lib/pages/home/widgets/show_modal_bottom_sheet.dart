@@ -45,9 +45,7 @@ class _ShowModalBottomState extends State<ShowModalBottom> {
   void onTapFunction(){
     showModalBottomSheet(
         context: context,
-        isDismissible: true,
         isScrollControlled: true,
-        enableDrag: true,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15.0),
@@ -55,18 +53,21 @@ class _ShowModalBottomState extends State<ShowModalBottom> {
           ),
         ),
         builder: (context) {
-          return GestureDetector(
-            onTap: () => Navigator.of(context).pop(),
-            child: Container(
-              height: sizeH * 0.5,
-              decoration: const BoxDecoration(
-                color: WalletColors.color_cbd5f3,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(0.0),topLeft: Radius.circular(15.0),
-                  bottomRight: Radius.circular(0.0),topRight: Radius.circular(15.0),
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Container(
+                height: sizeH * 0.5,
+                decoration: const BoxDecoration(
+                  color: WalletColors.color_cbd5f3,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(0.0),topLeft: Radius.circular(15.0),
+                    bottomRight: Radius.circular(0.0),topRight: Radius.circular(15.0),
+                  ),
                 ),
+                child: const AddPaymentPage(),
               ),
-              child: const AddPaymentPage(),
             ),
           );
         });
