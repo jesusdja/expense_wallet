@@ -31,6 +31,7 @@ class FirebaseConnectionPayment{
         listAll = result.docs.map((QueryDocumentSnapshot e){
           return PaymentModel.fromMap(e.data() as Map<String,dynamic>) ;
         }).toList();
+        listAll.sort((a,b) => b.date!.compareTo(a.date!));
       }
     }catch(ex){
       debugPrint(ex.toString());
@@ -42,6 +43,17 @@ class FirebaseConnectionPayment{
     bool res = false;
     try{
       await collection.doc(data.id).update(data.toMap());
+      res = true;
+    }catch(ex){
+      debugPrint(ex.toString());
+    }
+    return res;
+  }
+
+  Future<bool> delete({required String id}) async {
+    bool res = false;
+    try{
+      await collection.doc(id).delete();
       res = true;
     }catch(ex){
       debugPrint(ex.toString());

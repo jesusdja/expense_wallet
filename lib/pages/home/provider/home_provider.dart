@@ -52,6 +52,10 @@ class HomeProvider extends ChangeNotifier {
     loadDataInitial = false; notifyListeners();
   }
 
+  Future<bool> deletePayments({required String id}) async{
+    return await FirebaseConnectionPayment().delete(id: id,);
+  }
+
   void getDate({required DateTime dateInitial}){
 
     int monthOld = dateInitial.month;

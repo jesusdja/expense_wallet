@@ -17,6 +17,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   cached_network_image: ^3.2.3
   intl: ^0.18.1
+  flutter_slidable: ^2.0.0
   flutter_launcher_icons:
 
   #Estado
