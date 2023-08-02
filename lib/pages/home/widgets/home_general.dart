@@ -32,6 +32,11 @@ class _HomeGeneralState extends State<HomeGeneral> {
     homeProvider = Provider.of<HomeProvider>(context);
     categoriesProvider = Provider.of<CategoriesProvider>(context);
 
+    double total = 0.0;
+    for (var payment in homeProvider.payments) {
+      total += double.parse(payment.amount!.replaceAll(',', '.'));
+    }
+
     return SizedBox(
       width: sizeW,
       height: double.infinity,
@@ -47,11 +52,18 @@ class _HomeGeneralState extends State<HomeGeneral> {
               child: listData(),
             ),
           ),
+          SizedBox(width: sizeW,height: sizeH * 0.03),
+          SizedBox(
+            width: sizeW,
+            child: Text('${total.toStringAsFixed(2)} \$',style: WalletStyles().stylePrimary(
+              color: WalletColors.primary,size: sizeH * 0.05
+            ),textAlign: TextAlign.center),
+          ),
+          SizedBox(width: sizeW,height: sizeH * 0.07),
         ],
       ),
     );
   }
-
 
   Widget listData(){
 
@@ -71,6 +83,7 @@ class _HomeGeneralState extends State<HomeGeneral> {
     });
 
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: listW,
       ),
@@ -80,26 +93,87 @@ class _HomeGeneralState extends State<HomeGeneral> {
   Widget card({required List<PaymentModel> payments, required String category}){
 
     double total = 0;
+    List<Widget> listW = [];
     for (var pay in payments) {
       total = total + double.parse(pay.amount!.replaceAll(',', '.'));
+      listW.add(cardPay(paymentModel: pay));
     }
+
+    return InkWell(
+      onTap: (){
+        homeProvider.categorySelected = homeProvider.categorySelected.contains(category) ? '' : category;
+      },
+      child: Container(
+        width: sizeW,
+        margin: EdgeInsets.symmetric(horizontal: sizeW * 0.02),
+        padding: const EdgeInsets.all(5.0),
+        color: Colors.black12,
+        child: Column(
+          children: [
+            Container(
+              width: sizeW,
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.black12
+              ),
+              child: SizedBox(
+                width: sizeW,
+                child: Row(
+                  children: [
+                    Expanded(flex: 2, child:Text(category)),
+                    Text('$total \$',textAlign: TextAlign.right,),
+                  ],
+                ),
+              ),
+            ),
+            if(homeProvider.categorySelected.contains(category))...listW
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget cardPay({required PaymentModel paymentModel}){
+
+    DateTime date = DateTime.parse(paymentModel.date!);
+    String dateSt = '${date.day.toString().padLeft(2,'0')}/${date.month.toString().padLeft(2,'0')}/${date.year}';
 
     return Container(
       width: sizeW,
-      margin: EdgeInsets.symmetric(horizontal: sizeW * 0.02),
-      padding: const EdgeInsets.all(10.0),
+      margin: EdgeInsets.only(left: sizeW * 0.02),
+      padding: const EdgeInsets.all(5.0),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
+          borderRadius: BorderRadius.circular(0.0),
           color: Colors.black12
       ),
-      child: SizedBox(
-        width: sizeW,
-        child: Row(
-          children: [
-            Expanded(flex: 2, child:Text(category)),
-            Text('$total \$',textAlign: TextAlign.right,),
-          ],
-        ),
+      child: Column(
+        children: [
+          SizedBox(
+            width: sizeW,
+            child: Row(
+              children: [
+                Expanded(flex: 2, child:Text(paymentModel.title!)),
+                Text(dateSt,textAlign: TextAlign.right,),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: sizeW,
+            child: Row(
+              children: [
+                Expanded(flex: 2, child: Container()),
+                SizedBox(
+                    width: sizeW * 0.15,
+                    child: Text('${paymentModel.amount!}\$',textAlign: TextAlign.right,style: WalletStyles().stylePrimary(
+                      size: sizeH * 0.02,
+                      fontWeight: FontWeight.bold,
+                    ),)
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

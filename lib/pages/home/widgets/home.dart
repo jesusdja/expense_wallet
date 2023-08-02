@@ -61,7 +61,10 @@ class _HomeState extends State<Home> {
       listW.add(SizedBox(height: sizeH * 0.005,));
     }
 
+    listW.add(SizedBox(height: sizeH * 0.06,));
+
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: listW,
       ),

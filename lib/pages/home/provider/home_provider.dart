@@ -32,6 +32,10 @@ class HomeProvider extends ChangeNotifier {
   bool get typeHomePrimary => _typeHomePrimary;
   set typeHomePrimary(bool value){ _typeHomePrimary = value; notifyListeners(); }
 
+  String _categorySelected = '';
+  String get categorySelected => _categorySelected;
+  set categorySelected(String value){ _categorySelected = value; notifyListeners(); }
+
   Future userActive() async {
     AuthenticateFirebaseUser().firebaseAuth.authStateChanges().listen((event) async {
       userFirebase = event;
