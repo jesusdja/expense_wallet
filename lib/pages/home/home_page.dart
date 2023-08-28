@@ -2,6 +2,7 @@ import 'package:expense_wallet/config/wallet_colors.dart';
 import 'package:expense_wallet/config/wallet_image.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
+import 'package:expense_wallet/pages/home/widgets/button_options_general_saving.dart';
 import 'package:expense_wallet/pages/home/widgets/button_type_home.dart';
 import 'package:expense_wallet/pages/home/widgets/calendar_date_view.dart';
 import 'package:expense_wallet/pages/home/widgets/drawer.dart';
@@ -73,6 +74,8 @@ class _HomePageState extends State<HomePage> {
         const CalendarDate(),
         SizedBox(width: sizeW * 0.01,),
         const ButtonTypeHome(),
+        SizedBox(width: sizeW * 0.01,),
+        const ButtonSaving(),
         const Spacer(),
         InkWell(
           child: Container(

@@ -32,13 +32,16 @@ class HomeProvider extends ChangeNotifier {
   bool get typeHomePrimary => _typeHomePrimary;
   set typeHomePrimary(bool value){ _typeHomePrimary = value; notifyListeners(); }
 
-  bool _viewTotalGeneral = false;
+  bool _viewTotalGeneral = true;
   bool get viewTotalGeneral => _viewTotalGeneral;
   set viewTotalGeneral(bool value){ _viewTotalGeneral = value; notifyListeners(); }
 
   String _categorySelected = '';
   String get categorySelected => _categorySelected;
   set categorySelected(String value){ _categorySelected = value; notifyListeners(); }
+
+  Map<String,double> dataSaving = {};
+  void resetDataSaving(){ dataSaving = {}; notifyListeners(); }
 
   Future userActive() async {
     AuthenticateFirebaseUser().firebaseAuth.authStateChanges().listen((event) async {
@@ -90,6 +93,14 @@ class HomeProvider extends ChangeNotifier {
       getDataPayments();
     }
     notifyListeners();
+  }
+
+  void addSaving({required String key, required double value}){
+    dataSaving[key] = value; notifyListeners();
+  }
+
+  void deleteSaving({required String key}){
+    dataSaving.remove(key); notifyListeners();
   }
 
 }
