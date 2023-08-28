@@ -32,6 +32,10 @@ class HomeProvider extends ChangeNotifier {
   bool get typeHomePrimary => _typeHomePrimary;
   set typeHomePrimary(bool value){ _typeHomePrimary = value; notifyListeners(); }
 
+  bool _viewTotalGeneral = false;
+  bool get viewTotalGeneral => _viewTotalGeneral;
+  set viewTotalGeneral(bool value){ _viewTotalGeneral = value; notifyListeners(); }
+
   String _categorySelected = '';
   String get categorySelected => _categorySelected;
   set categorySelected(String value){ _categorySelected = value; notifyListeners(); }

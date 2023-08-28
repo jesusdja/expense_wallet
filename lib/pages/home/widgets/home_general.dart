@@ -55,9 +55,23 @@ class _HomeGeneralState extends State<HomeGeneral> {
           SizedBox(width: sizeW,height: sizeH * 0.03),
           SizedBox(
             width: sizeW,
-            child: Text('${total.toStringAsFixed(2)} \$',style: WalletStyles().stylePrimary(
-              color: WalletColors.primary,size: sizeH * 0.05
-            ),textAlign: TextAlign.center),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(homeProvider.viewTotalGeneral ? '*****.**' : '${total.toStringAsFixed(2)} \$',
+                style: WalletStyles().stylePrimary(
+                    color: WalletColors.primary,size: sizeH * 0.05
+                ),textAlign: TextAlign.center),
+                IconButton(
+                  onPressed: (){
+                    homeProvider.viewTotalGeneral = !homeProvider.viewTotalGeneral;
+                  },
+                  icon: Icon(homeProvider.viewTotalGeneral ? Icons.remove_red_eye : Icons.remove_red_eye_outlined,
+                  color: WalletColors.primary,size: sizeH * 0.04),
+                )
+              ],
+            ),
           ),
           SizedBox(width: sizeW,height: sizeH * 0.07),
         ],
@@ -122,7 +136,7 @@ class _HomeGeneralState extends State<HomeGeneral> {
                 child: Row(
                   children: [
                     Expanded(flex: 2, child:Text(category)),
-                    Text('$total \$',textAlign: TextAlign.right,),
+                    Text('${total.toStringAsFixed(2)} \$',textAlign: TextAlign.right,),
                   ],
                 ),
               ),
