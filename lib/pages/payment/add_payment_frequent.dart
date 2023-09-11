@@ -38,18 +38,20 @@ class _AddPaymentFrequentState extends State<AddPaymentFrequent> {
     List<Widget> listWPage = [];
 
     for (var element in paymentsMonthlyProvider.listPaymentsMonthly) {
-      bool isSend = true;
-      for (var element2 in homeProvider.payments) {
-        if(element2.title! == element.title! &&
-            element2.amount! == element.amount! &&
-            element2.category! == element.category!){
-          isSend = false;
+      if(element.status == 'activo'){
+        bool isSend = true;
+        for (var element2 in homeProvider.payments) {
+          if(element2.title! == element.title! &&
+              element2.amount! == element.amount! &&
+              element2.category! == element.category!){
+            isSend = false;
+          }
         }
-      }
-      if(isSend){
-        listDataW1.add(element);
-      }else{
-        listDataW2.add(element);
+        if(isSend){
+          listDataW1.add(element);
+        }else{
+          listDataW2.add(element);
+        }
       }
     }
 

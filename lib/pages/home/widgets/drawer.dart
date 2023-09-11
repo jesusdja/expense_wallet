@@ -77,7 +77,7 @@ class _DrawerHomeState extends State<DrawerHome> {
           SizedBox(height: sizeH * 0.05,),
           titleDrawer(type: 0),divide,
           titleDrawer(type: 1),divide,
-          titleDrawer(type: 2),divide,
+          //titleDrawer(type: 2),divide,
           Expanded(child: Container()),
           titleDrawer(type: 3),
           SizedBox(height: sizeH * 0.05,),
