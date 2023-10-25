@@ -6,6 +6,7 @@ import 'package:expense_wallet/pages/payment/provider/add_payment_provider.dart'
 import 'package:expense_wallet/widgets_utils/button_general.dart';
 import 'package:expense_wallet/widgets_utils/circular_progress_colors.dart';
 import 'package:expense_wallet/widgets_utils/dialog_alert.dart';
+import 'package:expense_wallet/widgets_utils/dropdown_button_generic.dart';
 import 'package:expense_wallet/widgets_utils/textfield_general.dart';
 import 'package:expense_wallet/widgets_utils/toast_widget.dart';
 import 'package:flutter/material.dart';
@@ -51,15 +52,7 @@ class _AddPaymentState extends State<AddPayment> {
           )),
         ),
         SizedBox(height: sizeH * 0.03,),
-        Container(
-          width: sizeW,
-          margin: EdgeInsets.symmetric(horizontal: sizeW * 0.1),
-          child: TextFieldGeneral(
-            textEditingController: addPaymentProvider.controllerTitle,
-            hintText: 'Titulo',
-          ),
-        ),
-        SizedBox(height: sizeH * 0.01,),
+
         Container(
           width: sizeW,
           margin: EdgeInsets.symmetric(horizontal: sizeW * 0.1),
@@ -74,6 +67,15 @@ class _AddPaymentState extends State<AddPayment> {
         categoriesP.loadDataInitial ?
         Center(child: circularProgressColors(widthContainer2: sizeH * 0.03,widthContainer1: sizeH * 0.03),) : listCategories(),
         SizedBox(height: sizeH * 0.03,),
+        Container(
+          width: sizeW,
+          margin: EdgeInsets.symmetric(horizontal: sizeW * 0.1),
+          child: TextFieldGeneral(
+            textEditingController: addPaymentProvider.controllerTitle,
+            hintText: 'Nota (opcional)',
+          ),
+        ),
+        SizedBox(height: sizeH * 0.03,),
         addPaymentProvider.loadSaveAdd ?
         circularProgressColors(widthContainer1: sizeW * 0.3, widthContainer2: sizeW * 0.08) :
         ButtonGeneral(
@@ -85,7 +87,7 @@ class _AddPaymentState extends State<AddPayment> {
           onPressed: ()=> addPay(),
           backgroundColor: WalletColors.primary,
         ),
-        SizedBox(height: sizeH * 0.03,),
+        SizedBox(height: sizeH * 0.05,),
       ],
     );
   }
@@ -129,10 +131,6 @@ class _AddPaymentState extends State<AddPayment> {
 
     if(addPaymentProvider.controllerAmount.text.isEmpty){
       error = 'Monto no puede estar vacio';
-    }
-
-    if(addPaymentProvider.controllerTitle.text.isEmpty){
-      error = 'Título no puede estar vacio';
     }
 
     if(addPaymentProvider.categoriesSelected == null){

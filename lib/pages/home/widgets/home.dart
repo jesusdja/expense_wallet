@@ -105,7 +105,7 @@ class _HomeState extends State<Home> {
               width: sizeW,
               child: Row(
                 children: [
-                  Expanded(flex: 2, child:Text(paymentModel.title!)),
+                  Expanded(flex: 2, child:Text(paymentModel.category!)),
                   Text(dateSt,textAlign: TextAlign.right,),
                 ],
               ),
@@ -114,7 +114,7 @@ class _HomeState extends State<Home> {
               width: sizeW,
               child: Row(
                 children: [
-                  Expanded(flex: 2, child:Text(paymentModel.category!,textAlign: TextAlign.right,)),
+                  Expanded(flex: 2, child:Text('Nota: ${paymentModel.title!}',textAlign: TextAlign.left,)),
                   SizedBox(
                     width: sizeW * 0.15,
                     child: Text('${paymentModel.amount!}\$',textAlign: TextAlign.right,style: WalletStyles().stylePrimary(

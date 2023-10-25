@@ -58,7 +58,7 @@ class _ShowModalBottomState extends State<ShowModalBottom> {
             child: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
               child: Container(
-                height: sizeH * 0.5,
+                height: sizeH * 0.55,
                 decoration: const BoxDecoration(
                   color: WalletColors.color_cbd5f3,
                   borderRadius: BorderRadius.only(
