@@ -103,18 +103,19 @@ class _CardAddState extends State<CardAdd> {
                     ),
                   ),
                   onTap: (){
-                    showDatePicker(
-                        context: context,
-                        initialDate: paymentsMonthlyProvider.datePayment ?? DateTime.now(),
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(DateTime.now().year + 1))
-                        .then((value) {
-                      if(value != null){
-                        setState(() {
-                          paymentsMonthlyProvider.datePayment = value;
-                        });
-                      }
-                    });
+                    selectedDate();
+                    // showDatePicker(
+                    //     context: context,
+                    //     initialDate: paymentsMonthlyProvider.datePayment ?? DateTime.now(),
+                    //     firstDate: DateTime.now(),
+                    //     lastDate: DateTime(DateTime.now().year + 1))
+                    //     .then((value) {
+                    //   if(value != null){
+                    //     setState(() {
+                    //       paymentsMonthlyProvider.datePayment = value;
+                    //     });
+                    //   }
+                    // });
                   },
                 )
               ],
@@ -233,6 +234,67 @@ class _CardAddState extends State<CardAdd> {
       showAlert(text: error, isError: true);
     }
     paymentsMonthlyProvider.loadSaveAdd = false;
+  }
+
+  Future selectedDate() async {
+    List<int> listInt = [];
+    for(int x = 1; x < 32; x++){ listInt.add(x); }
+
+    List<Widget> listW = [];
+    for(int x = 0; x < listInt.length; x++) {
+      listW.add(
+        InkWell(
+          onTap: (){
+            Navigator.of(context).pop(listInt[x]);
+          },
+          child: Container(
+            width: sizeW * 0.1,
+            padding: const EdgeInsets.all(10),
+            color: WalletColors.primary,
+            child: Center(
+              child: Text(listInt[x].toString(),style: WalletStyles().stylePrimary(size: sizeH * 0.02,color: Colors.white,fontWeight: FontWeight.bold)),
+            ),
+          ),
+        )
+      );
+    }
+
+    int? res = await showDialog(
+        context: context,
+        builder: ( context ) {
+          return GestureDetector(
+            onTap: (){
+              Navigator.of(context).pop();
+            },
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              body: Center(
+                child: Container(
+                  width: sizeW,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  margin: EdgeInsets.symmetric(horizontal: sizeW * 0.06),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: WalletColors.primary,
+                  ),
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 10,
+                    runSpacing: 5,
+                    children: listW,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+    );
+    if(res != null){
+      setState(() {
+        DateTime date = DateTime.now();
+        paymentsMonthlyProvider.datePayment = DateTime.parse('${date.year}-${date.month}-$res');
+      });
+    }
   }
 }
 
