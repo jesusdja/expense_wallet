@@ -35,7 +35,10 @@ class _ButtonTypeHomeState extends State<ButtonTypeHome> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: Center(
-          child: Text( homeProvider.typeHomePrimary ? 'Datos Generales' : 'Gastos'),
+          child: Text( homeProvider.typeHomePrimary ? 'Datos Generales' : 'Gastos',
+              style: WalletStyles().stylePrimary(
+              color: Colors.white,size: sizeH * 0.02
+          )),
         ),
       ),
       onTap: (){

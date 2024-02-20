@@ -35,7 +35,9 @@ class _CalendarDateState extends State<CalendarDate> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: Center(
-          child: Text(homeProvider.dateSelected),
+          child: Text(homeProvider.dateSelected,style: WalletStyles().stylePrimary(
+            color: Colors.white,size: sizeH * 0.02
+          )),
         ),
       ),
       onTapDown: (details) {

@@ -248,7 +248,7 @@ class _CardAddState extends State<CardAdd> {
             Navigator.of(context).pop(listInt[x]);
           },
           child: Container(
-            width: sizeW * 0.1,
+            width: sizeW * 0.2,
             padding: const EdgeInsets.all(10),
             color: WalletColors.primary,
             child: Center(
@@ -292,7 +292,7 @@ class _CardAddState extends State<CardAdd> {
     if(res != null){
       setState(() {
         DateTime date = DateTime.now();
-        paymentsMonthlyProvider.datePayment = DateTime.parse('${date.year}-${date.month}-$res');
+        paymentsMonthlyProvider.datePayment = DateTime.parse('${date.year}-12-${res.toString().padLeft(2,'0')}');
       });
     }
   }

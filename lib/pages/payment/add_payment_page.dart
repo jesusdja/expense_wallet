@@ -1,4 +1,5 @@
 import 'package:expense_wallet/config/wallet_colors.dart';
+import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/payment/add_payment.dart';
 import 'package:expense_wallet/pages/payment/add_payment_frequent.dart';
@@ -42,7 +43,10 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(WalletColors.primary),
             ),
-            child: Text(addPaymentProvide.payFrequents ? 'Ir a pagos' : 'Ir a frecuentes',textAlign: TextAlign.center),
+            child: Text(addPaymentProvide.payFrequents ? 'Ir a pagos' : 'Ir a frecuentes',textAlign: TextAlign.center,
+                style: WalletStyles().stylePrimary(
+                color: Colors.white,size: sizeH * 0.02
+            )),
             onPressed: (){
               addPaymentProvide.payFrequents = !addPaymentProvide.payFrequents;
             },
