@@ -73,18 +73,14 @@ class HomeProvider extends ChangeNotifier {
 
   void getDate({required DateTime dateInitial}){
 
-    int monthOld = dateInitial.month;
-    int yearOld = dateInitial.year;
+    dateInitial = DateTime.now().add(const Duration(days: -265));
     listDate = [];
 
-    while(monthOld <= DateTime.now().month && yearOld <= DateTime.now().year){
-      debugPrint('$monthOld <= ${DateTime.now().month} && $yearOld <= ${DateTime.now().year}');
-      listDate.add('${monthOld.toString().padLeft(2,'0')}/$yearOld');
-      if(monthOld == 12){
-        yearOld++;
-        monthOld = 1;
-      }else{
-        monthOld++;
+    while(dateInitial.difference(DateTime.now()).inDays <= 0){
+      debugPrint('$dateInitial dif ${dateInitial.difference(DateTime.now()).inDays}');
+      dateInitial = dateInitial.add(const Duration(days: 1));
+      if(!listDate.contains('${dateInitial.month.toString().padLeft(2,'0')}/${dateInitial.year}')){
+        listDate.add('${dateInitial.month.toString().padLeft(2,'0')}/${dateInitial.year}');
       }
     }
 
