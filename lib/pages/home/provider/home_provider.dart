@@ -73,7 +73,6 @@ class HomeProvider extends ChangeNotifier {
 
   void getDate({required DateTime dateInitial}){
 
-    dateInitial = DateTime.now().add(const Duration(days: -265));
     listDate = [];
 
     while(dateInitial.difference(DateTime.now()).inDays <= 0){
