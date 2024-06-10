@@ -28,9 +28,9 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-  bool _typeHomePrimary = true;
-  bool get typeHomePrimary => _typeHomePrimary;
-  set typeHomePrimary(bool value){ _typeHomePrimary = value; notifyListeners(); }
+  int _typeHomePrimary = 0;
+  int get typeHomePrimary => _typeHomePrimary;
+  set typeHomePrimary(int value){ _typeHomePrimary = value; notifyListeners(); }
 
   bool _viewTotalGeneral = true;
   bool get viewTotalGeneral => _viewTotalGeneral;

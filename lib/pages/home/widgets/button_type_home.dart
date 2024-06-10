@@ -7,6 +7,7 @@ import 'package:expense_wallet/pages/home/widgets/drawer.dart';
 import 'package:expense_wallet/pages/home/widgets/show_modal_bottom_sheet.dart';
 import 'package:expense_wallet/pages/payment/models/payment_model.dart';
 import 'package:expense_wallet/widgets_utils/circular_progress_colors.dart';
+import 'package:expense_wallet/widgets_utils/show_dialog_message.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,10 @@ class _ButtonTypeHomeState extends State<ButtonTypeHome> {
 
     homeProvider = Provider.of<HomeProvider>(context);
 
+    String title = 'Datos Generales';
+    if(homeProvider.typeHomePrimary == 1){ title = 'Gastos'; }
+    if(homeProvider.typeHomePrimary == 2){ title = 'Ahorros'; }
+
     return InkWell(
       child: Container(
         padding: const EdgeInsets.all(5.0),
@@ -35,14 +40,17 @@ class _ButtonTypeHomeState extends State<ButtonTypeHome> {
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: Center(
-          child: Text( homeProvider.typeHomePrimary ? 'Datos Generales' : 'Gastos',
+          child: Text( title,
               style: WalletStyles().stylePrimary(
               color: Colors.white,size: sizeH * 0.02
           )),
         ),
       ),
-      onTap: (){
-        homeProvider.typeHomePrimary = !homeProvider.typeHomePrimary;
+      onTap: () async {
+        int? res = await ShowDialogMessage().showBox(context: context);
+        if(res != null){
+          homeProvider.typeHomePrimary = res;
+        }
       },
     );
   }

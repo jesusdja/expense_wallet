@@ -27,7 +27,7 @@ class _ButtonTypeHomeState extends State<ButtonSaving> {
 
     homeProvider = Provider.of<HomeProvider>(context);
 
-    return homeProvider.typeHomePrimary ? Container() : InkWell(
+    return homeProvider.typeHomePrimary == 1 ? Container() : InkWell(
       child: Container(
         padding: const EdgeInsets.all(5.0),
         margin: EdgeInsets.only(left: sizeW * 0.02,top: sizeH * 0.01,bottom: sizeH * 0.01),

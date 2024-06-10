@@ -54,7 +54,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            homeProvider.typeHomePrimary ? const Home() : const HomeGeneral(),
+            if(homeProvider.typeHomePrimary == 0)...[ const Home() ],
+            if(homeProvider.typeHomePrimary == 1)...[ const HomeGeneral() ],
+            if(homeProvider.typeHomePrimary == 2)...[ const Scaffold() ],
             const Align(
               alignment: Alignment.bottomCenter,
               child: ShowModalBottom(),
