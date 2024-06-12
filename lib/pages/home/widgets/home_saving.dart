@@ -129,8 +129,8 @@ class _HomeGeneralState extends State<HomeSaving> {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0.0,
+      leading: Container(),
       actions: [
-
         SizedBox(
           width: sizeW,
           child: Row(

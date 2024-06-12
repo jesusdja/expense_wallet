@@ -9,6 +9,7 @@ import 'package:expense_wallet/pages/home/widgets/drawer.dart';
 import 'package:expense_wallet/pages/home/widgets/home.dart';
 import 'package:expense_wallet/pages/home/widgets/home_general.dart';
 import 'package:expense_wallet/pages/home/widgets/show_modal_bottom_sheet.dart';
+import 'package:expense_wallet/pages/savings/savings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             ),
             if(homeProvider.typeHomePrimary == 0)...[ const Home() ],
             if(homeProvider.typeHomePrimary == 1)...[ const HomeGeneral() ],
-            if(homeProvider.typeHomePrimary == 2)...[ const Scaffold() ],
+            if(homeProvider.typeHomePrimary == 2)...[ const SavingsPage() ],
             const Align(
               alignment: Alignment.bottomCenter,
               child: ShowModalBottom(),

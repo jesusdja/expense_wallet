@@ -27,7 +27,7 @@ class _ButtonTypeHomeState extends State<ButtonSaving> {
 
     homeProvider = Provider.of<HomeProvider>(context);
 
-    return homeProvider.typeHomePrimary == 1 ? Container() : InkWell(
+    return homeProvider.typeHomePrimary != 1 ? Container() : InkWell(
       child: Container(
         padding: const EdgeInsets.all(5.0),
         margin: EdgeInsets.only(left: sizeW * 0.02,top: sizeH * 0.01,bottom: sizeH * 0.01),
@@ -35,8 +35,10 @@ class _ButtonTypeHomeState extends State<ButtonSaving> {
           color: WalletColors.primary,
           borderRadius: BorderRadius.circular(5.0),
         ),
-        child: const Center(
-          child: Text('Ahorrar??'),
+        child: Center(
+          child: Text('Pudiste Ahorrar??',style: WalletStyles().stylePrimary(
+            size: sizeH * 0.02,color: Colors.white
+          )),
         ),
       ),
       onTap: (){
