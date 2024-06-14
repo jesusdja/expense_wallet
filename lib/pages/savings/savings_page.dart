@@ -3,6 +3,7 @@ import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/savings/models/savings_model.dart';
 import 'package:expense_wallet/pages/savings/providers/savings_provider.dart';
+import 'package:expense_wallet/pages/savings/widgets/savings_details.dart';
 import 'package:expense_wallet/pages/savings/widgets/show_dialog_add.dart';
 import 'package:expense_wallet/widgets_utils/circular_progress_colors.dart';
 import 'package:expense_wallet/widgets_utils/dialog_alert.dart';
@@ -94,6 +95,21 @@ class _SavingsPageState extends State<SavingsPage> {
   }
 
   Widget card({required SavingModel savingModel, required int index}){
+
+    double amountDou = 0;
+    for (var element in savingModel.lines) {
+      if(element.status == 'add'){
+        amountDou = amountDou + element.amount!;
+      }else if(element.status == 'pay'){
+        amountDou = amountDou + element.amount!;
+      }else if(element.status == 'take'){
+        amountDou = amountDou - element.amount!;
+      }else if(element.status == 'delete'){
+        amountDou = amountDou - element.amount!;
+      }
+    }
+
+
     return Slidable(
       key: ValueKey(index),
       closeOnScroll: true,
@@ -109,25 +125,31 @@ class _SavingsPageState extends State<SavingsPage> {
           ),
         ],
       ),
-      child: Container(
-        width: sizeW,
-        margin: EdgeInsets.symmetric(horizontal: sizeW * 0.02),
-        padding: const EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0),
-            color: Colors.black12
-        ),
-        child: Row(
-          children: [
-            Expanded(flex: 2, child:Text(savingModel.title ?? '',textAlign: TextAlign.left,)),
-            SizedBox(
-                width: sizeW * 0.15,
-                child: Text('0.00\$',textAlign: TextAlign.right,style: WalletStyles().stylePrimary(
-                  size: sizeH * 0.02,
-                  fontWeight: FontWeight.bold,
-                ),)
-            ),
-          ],
+      child: InkWell(
+        onTap: (){
+          Navigator.push(context,MaterialPageRoute<void>(
+              builder: (context) => SavingsDetails(savingModel: savingModel)
+          ),);
+        },
+        child: Container(
+          width: sizeW,
+          margin: EdgeInsets.symmetric(horizontal: sizeW * 0.02),
+          padding: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              color: Colors.black12
+          ),
+          child: Row(
+            children: [
+              Expanded(flex: 2, child:Text(savingModel.title ?? '',textAlign: TextAlign.left,)),
+              SizedBox(
+                  child: Text('${amountDou.toStringAsFixed(2)}\$',textAlign: TextAlign.right,style: WalletStyles().stylePrimary(
+                    size: sizeH * 0.02,
+                    fontWeight: FontWeight.bold,
+                  ),)
+              ),
+            ],
+          ),
         ),
       ),
     );

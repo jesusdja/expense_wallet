@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class SavingModel{
 
   String? id;
@@ -27,7 +29,7 @@ class SavingModel{
     title = snapshot['title'],
     user = snapshot['user'],
     date = snapshot['date'],
-    lines = (snapshot['lines'] as List).map((e) => SavingLineModel.fromMap(e)).toList();
+    lines = (snapshot['lines'] as List).map((e) => SavingLineModel.fromMap(jsonDecode(e))).toList();
 }
 
 class SavingLineModel{
