@@ -1,9 +1,5 @@
-import 'package:expense_wallet/pages/payment/models/payment_model.dart';
-import 'package:expense_wallet/pages/payment/provider/firebase_connection_add_payments.dart';
 import 'package:expense_wallet/pages/savings/firebase/firebase_connection_savings.dart';
 import 'package:expense_wallet/pages/savings/models/savings_model.dart';
-import 'package:expense_wallet/services/authenticate_firebase.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SavingsProvider extends ChangeNotifier {

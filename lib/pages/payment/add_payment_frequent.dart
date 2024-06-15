@@ -1,7 +1,6 @@
 import 'package:expense_wallet/config/wallet_style.dart';
 import 'package:expense_wallet/initial_page.dart';
 import 'package:expense_wallet/pages/home/provider/home_provider.dart';
-import 'package:expense_wallet/pages/payment/models/payment_model.dart';
 import 'package:expense_wallet/pages/payment/provider/add_payment_provider.dart';
 import 'package:expense_wallet/pages/payments_monthly/models/payment_monthly_model.dart';
 import 'package:expense_wallet/pages/payments_monthly/providers/payments_monthly_provider.dart';

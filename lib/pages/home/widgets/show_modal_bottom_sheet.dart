@@ -26,7 +26,7 @@ class _ShowModalBottomState extends State<ShowModalBottom> {
           width: sizeW,
           height: sizeH * 0.05,
           decoration: const BoxDecoration(
-            color: WalletColors.color_829ae3,
+            color: WalletColors.color829ae3,
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(0.0),topLeft: Radius.circular(15.0),
               bottomRight: Radius.circular(0.0),topRight: Radius.circular(15.0),
@@ -60,7 +60,7 @@ class _ShowModalBottomState extends State<ShowModalBottom> {
               child: Container(
                 height: sizeH * 0.55,
                 decoration: const BoxDecoration(
-                  color: WalletColors.color_cbd5f3,
+                  color: WalletColors.colorCbd5f3,
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(0.0),topLeft: Radius.circular(15.0),
                     bottomRight: Radius.circular(0.0),topRight: Radius.circular(15.0),

@@ -2,8 +2,6 @@ import 'package:expense_wallet/pages/categories/models/categories_model.dart';
 import 'package:expense_wallet/pages/payment/models/payment_model.dart';
 import 'package:expense_wallet/pages/payment/provider/firebase_connection_add_payments.dart';
 import 'package:expense_wallet/pages/payments_monthly/models/payment_monthly_model.dart';
-import 'package:expense_wallet/services/authenticate_firebase.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AddPaymentProvider extends ChangeNotifier {
