@@ -100,8 +100,6 @@ class _SavingsPageState extends State<SavingsPage> {
     for (var element in savingModel.lines) {
       if(element.status == 'add'){
         amountDou = amountDou + element.amount!;
-      }else if(element.status == 'pay'){
-        amountDou = amountDou + element.amount!;
       }else if(element.status == 'take'){
         amountDou = amountDou - element.amount!;
       }else if(element.status == 'delete'){
